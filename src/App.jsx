@@ -1,13 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+
 import SkillCard from './components/skillCard.jsx'
+import NavBar from './components/NavBar.jsx'
 
 function App() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
+       <NavBar/>
       <SkillCard
         name="React + Hooks"
         category="Frontend"
