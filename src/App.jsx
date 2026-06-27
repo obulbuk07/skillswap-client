@@ -1,17 +1,10 @@
 
-import SkillCard from './components/skillCard.jsx'
-import NavBar from './components/NavBar.jsx'
+import Home from './pages/Home.jsx'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-       <NavBar/>
-      <SkillCard
-        name="React + Hooks"
-        category="Frontend"
-        author="Алекс"
-        canTeach={true}
-      />
+    <div className="min-h-screen bg-gray-50">
+       <Home/>
     </div>
   )
 }
