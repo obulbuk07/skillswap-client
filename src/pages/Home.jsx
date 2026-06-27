@@ -18,7 +18,8 @@ function Home(){
         <div>
             <NavBar/>
             <FilterBar onCategoryChange={setActiveCategory} activeCategory={activeCategory}/>
-            {filteredSkills.map(skill => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
+                {filteredSkills.map(skill => (
                 <SkillCard 
                     key = {skill.id}
                     name = {skill.name}
@@ -27,6 +28,8 @@ function Home(){
                     canTeach = {skill.canTeach}
                 />
             ))}
+            </div>
+            
         </div>
    )
 }

@@ -3,7 +3,7 @@ const categories = ['All', 'Frontend', 'Backend', 'Design', 'Data']
 function FilterBar({onCategoryChange, activeCategory}){
 
     return(
-        <div>
+        <div className="px-6 py-3">
             {categories.map(cat => (
                 <button
                     key = {cat}
