@@ -1,8 +1,10 @@
 import {useState} from 'react'
 import NavBar from '../components/NavBar'
+import { useNavigate } from 'react-router-dom'
 
 function AddSkill(){
     const [form, setForm] = useState({name: '', category:'', author: '', canTeach: true})
+    const navigate = useNavigate()
 
     return(
         <div>
@@ -11,6 +13,7 @@ function AddSkill(){
                 onSubmit={(e) => {
                 e.preventDefault()
                 console.log(form)
+                navigate("/")
                 }}
             >
                 <input
@@ -36,9 +39,12 @@ function AddSkill(){
                 </select>
                 <input
                     type="checkbox"
-                    value={form.canTeach}
+                    checked={form.canTeach}
                     onChange={(e) => setForm({...form, canTeach: e.target.checked})}
                 />
+                <button type='button' onClick={() => navigate("/")}>
+                    Cancel
+                </button>
                 <button type='submit'>
                     Add Skill
                 </button>
