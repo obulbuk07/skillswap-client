@@ -15,11 +15,13 @@ function AddSkill(){
             >
                 <input
                     type='text'
+                    placeholder='Skill name'
                     value={form.name}
                     onChange={(e) => setForm({...form, name: e.target.value})}
                 />
                 <input 
                     type="text" 
+                    placeholder='Author name'
                     value = {form.author}
                     onChange={(e) => setForm({...form, author: e.target.value})}
                 />
