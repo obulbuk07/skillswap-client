@@ -2,14 +2,18 @@ import NavBar from "../components/NavBar"
 import SkillCard from "../components/skillCard";
 import FilterBar from "../components/FilterBar";
 import { useState, useEffect } from 'react'
-
+import Loader from "../components/Loader";
 
 function Home(){
     const [skills, setSkills] = useState([])
+    const [loading, setLoading] =useState(true)
     useEffect(() => {
         fetch('http://localhost:3000/api/skills')
         .then(res => res.json())
-        .then(data => setSkills(data))
+        .then(data => {
+            setSkills(data)
+            setLoading(false)
+        })
     }, [])
     const [activeCategory, setActiveCategory] = useState('All')
     const filteredSkills = activeCategory === 'All' 
@@ -24,8 +28,8 @@ function Home(){
         .then(() => setSkills(skills.filter(skill => skill.id !== id )))
 
     }
+    if(loading) return <Loader/>
    return(
-
         <div>
             <NavBar/>
             <FilterBar onCategoryChange={setActiveCategory} activeCategory={activeCategory}/>

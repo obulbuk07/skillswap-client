@@ -3,15 +3,19 @@ import NavBar from '../components/NavBar'
 import { useNavigate } from 'react-router-dom'
 
 function AddSkill(){
-    const [form, setForm] = useState({name: '', category:'', author: '', canTeach: true})
+    const [form, setForm] = useState({name: '', category:'', canTeach: true})
     const navigate = useNavigate()
-
+    const [errors, setErrors] = useState({})
     return(
         <div>
             <NavBar/>
              <form className='max-w-lg mx-auto mt-10 bg-white p-8 rounded-xl border border-gray-200'
                 onSubmit={(e) => {
                 e.preventDefault()
+                if(!form.name){
+                    setErrors({name:'Skill name is required'})
+                    return;
+                }
                 fetch('http://localhost:3000/api/skills', {
                     method:'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -31,15 +35,7 @@ function AddSkill(){
                         value={form.name}
                         onChange={(e) => setForm({...form, name: e.target.value})}
                     />
-                </div>
-                <div className="flex flex-col gap-1 mb-4">
-                    <label className="text-sm font-medium text-gray-700">Author name</label>
-                    <input className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400" 
-                        type="text" 
-                        placeholder='Author name'
-                        value = {form.author}
-                        onChange={(e) => setForm({...form, author: e.target.value})}
-                    />
+                    {errors.name && <p className='text-red-500 text-xs mt-1'>{errors.name}</p>}
                 </div>
                 <div className="flex flex-col gap-1 mb-4">
                     <label className="text-sm font-medium text-gray-700">Category</label>
