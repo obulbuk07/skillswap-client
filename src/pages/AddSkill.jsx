@@ -12,8 +12,14 @@ function AddSkill(){
              <form className='max-w-lg mx-auto mt-10 bg-white p-8 rounded-xl border border-gray-200'
                 onSubmit={(e) => {
                 e.preventDefault()
-                console.log(form)
-                navigate("/")
+                fetch('http://localhost:3000/api/skills', {
+                    method:'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(form)
+                })
+                .then(res => res.json())
+                .then(data => navigate('/'))
+                
                 }}
             >
                 <h1 className="text-xl font-semibold text-gray-900 mb-6">Add new skill</h1>
