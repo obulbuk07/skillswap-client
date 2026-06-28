@@ -1,14 +1,16 @@
 import NavBar from "../components/NavBar"
 import SkillCard from "../components/skillCard";
 import FilterBar from "../components/FilterBar";
-import { useState } from 'react'
-const skills = [
-  { id: 1, name: 'React', category: 'Frontend', author: 'Alex', canTeach: true },
-  { id: 2, name: 'PostgreSQL', category: 'Backend', author: 'Maria', canTeach: false },
-  { id: 3, name: 'Figma', category: 'Design', author: 'Dima', canTeach: true },
-]
+import { useState, useEffect } from 'react'
+
 
 function Home(){
+    const [skills, setSkills] = useState([])
+    useEffect(() => {
+        fetch('http://localhost:3000/api/skills')
+        .then(res => res.json())
+        .then(data => setSkills(data))
+    }, [])
     const [activeCategory, setActiveCategory] = useState('All')
     const filteredSkills = activeCategory === 'All' 
     ? skills 
@@ -25,7 +27,7 @@ function Home(){
                     name = {skill.name}
                     category = {skill.category}
                     author = {skill.author}
-                    canTeach = {skill.canTeach}
+                    canTeach = {skill.can_teach}
                 />
             ))}
             </div>
