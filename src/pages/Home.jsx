@@ -15,6 +15,15 @@ function Home(){
     const filteredSkills = activeCategory === 'All' 
     ? skills 
     : skills.filter(skill => skill.category === activeCategory)
+
+    const handleDelete = (id) => {
+        fetch(`http://localhost:3000/api/skills/${id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(() => setSkills(skills.filter(skill => skill.id !== id )))
+
+    }
    return(
 
         <div>
@@ -28,6 +37,7 @@ function Home(){
                     category = {skill.category}
                     author = {skill.author}
                     canTeach = {skill.can_teach}
+                    onDelete={() => handleDelete(skill.id)}
                 />
             ))}
             </div>
