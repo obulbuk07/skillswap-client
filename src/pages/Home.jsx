@@ -3,10 +3,14 @@ import SkillCard from "../components/skillCard";
 import FilterBar from "../components/FilterBar";
 import { useState, useEffect } from 'react'
 import Loader from "../components/Loader";
+import {jwtDecode} from 'jwt-decode'
+
 
 function Home(){
     const [skills, setSkills] = useState([])
     const [loading, setLoading] =useState(true)
+    const token = localStorage.getItem('token')
+    const currentUserId = token ? jwtDecode(token).id : null
     useEffect(() => {
         fetch('http://localhost:3000/api/skills')
         .then(res => res.json())
@@ -22,11 +26,19 @@ function Home(){
 
     const handleDelete = (id) => {
         fetch(`http://localhost:3000/api/skills/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers:{
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
         })
-        .then(res => res.json())
+        .then(res => { 
+            if(!res.ok){
+                throw new Error("Not authorized to delete!")
+            }
+            return res.json()
+        })
         .then(() => setSkills(skills.filter(skill => skill.id !== id )))
-
+        .catch(err => alert(err.message))
     }
     if(loading) return <Loader/>
    return(
@@ -42,6 +54,9 @@ function Home(){
                     author = {skill.author}
                     canTeach = {skill.can_teach}
                     onDelete={() => handleDelete(skill.id)}
+                    isOwner = {skill.user_id === currentUserId}
+                    id={skill.id}
+
                 />
             ))}
             </div>
