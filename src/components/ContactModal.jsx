@@ -14,7 +14,7 @@ function ContactModal({skillId, onClose}){
                     placeholder='Enter your message to author'
                     value={mssg}
                 />
-                <div className="flex gap-3">
+                <div className="flex gap-3 ">
                     <button 
                         type='button' 
                         onClick={() => {
@@ -32,14 +32,14 @@ function ContactModal({skillId, onClose}){
                             onClose()
                          })
                         }}
-                        className="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm"
+                        className="flex-1 bg-blue-600 text-white py-2 rounded-lg text-sm hover:text-blue-600 hover:bg-white hover:border-blue-600 hover:border transition"
                     >
                         Send
                     </button>
                     <button 
                         type='button' 
                         onClick={onClose}
-                        className="flex-1 border border-gray-200 py-2 rounded-lg text-sm"
+                        className="flex-1 border border-gray-200 py-2 rounded-lg text-sm hover:text-white hover:bg-red-600 hover:border hover:border-red-600"
                     >
                          Cancel
                     </button>

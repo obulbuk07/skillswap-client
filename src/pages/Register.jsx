@@ -5,7 +5,7 @@ function Register(){
     const [form, setForm] = useState({name: '', email: '', password:''})
     const navigate = useNavigate()
     return(
-        <div className='max-w-lg mx-auto mt-10 bg-white p-8 rounded-xl border border-gray-200'>
+        <div className='max-w-lg mx-auto mt-30 bg-white p-8 rounded-xl border border-gray-200'>
             <form
                 onSubmit={(e) => {
                     e.preventDefault()
@@ -41,7 +41,7 @@ function Register(){
                     />
                 </div>
                
-                <button className='px-6 py-2 border-[3px] border-blue-600 rounded-[10px] hover:bg-blue-600 hover:text-white transition' type='submit'>
+                <button className='px-6 py-2 mr-2 border-[3px] border-blue-600 rounded-[10px] hover:bg-blue-600 hover:text-white transition' type='submit'>
                     Sign in
                 </button>
                 <button className='px-6 py-2 border-[3px] border-blue-600 rounded-[10px] hover:bg-blue-600 hover:text-white transition' onClick={() => navigate('/login')} type='button'>

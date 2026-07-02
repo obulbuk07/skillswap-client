@@ -20,9 +20,14 @@ function Home(){
         })
     }, [])
     const [activeCategory, setActiveCategory] = useState('All')
-    const filteredSkills = activeCategory === 'All' 
-    ? skills 
-    : skills.filter(skill => skill.category === activeCategory)
+    const [activeCanTeachCategory, setActiveCanTeachCategory] = useState('All')
+    const filteredSkills = skills
+        .filter(skill => activeCategory === 'All' || skill.category === activeCategory)
+        .filter(skill => {
+            if(activeCanTeachCategory === 'Can teach') return skill.can_teach === true
+            if(activeCanTeachCategory === 'Want to learn') return skill.can_teach === false
+            return true 
+        })
 
     const handleDelete = (id) => {
         fetch(`http://localhost:3000/api/skills/${id}`, {
@@ -44,13 +49,20 @@ function Home(){
    return(
         <div>
             <NavBar/>
-            <FilterBar onCategoryChange={setActiveCategory} activeCategory={activeCategory}/>
+            <FilterBar
+                onCategoryChange={setActiveCategory}
+                activeCategory={activeCategory}
+                onCanTeachCategoryChange={setActiveCanTeachCategory}
+                activeCanTeachCategory={activeCanTeachCategory}
+                />
+                
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
                 {filteredSkills.map(skill => (
                 <SkillCard 
                     key = {skill.id}
                     name = {skill.name}
                     category = {skill.category}
+                    canTeachCategory = {skill.canTeachCategory}
                     author = {skill.author}
                     canTeach = {skill.can_teach}
                     onDelete={() => handleDelete(skill.id)}
