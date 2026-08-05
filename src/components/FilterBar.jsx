@@ -5,8 +5,8 @@ const canTeachCategories = ['All', 'Can teach', 'Want to learn']
 function FilterBar({onCategoryChange, activeCategory, onCanTeachCategoryChange, activeCanTeachCategory}){
     const token = localStorage.getItem('token')
     return(
-        <div className='flex justify-between p-4'>
-            <div className="px-6 flex gap-4">
+        <div className='flex justify-between p-4 flex-col md:flex-row gap-6 md:gap-0'>
+            <div className="px-0 flex gap-2 flex-wrap md:px-6 md:gap-4">
                 {categories.map(cat => (
                     <button
                         key = {cat}
@@ -18,7 +18,7 @@ function FilterBar({onCategoryChange, activeCategory, onCanTeachCategoryChange, 
                 ))}
             
             </div>
-            <div className='flex gap-4'>
+            <div className='flex md:gap-4 gap-2'>
                 {canTeachCategories.map(canTeachcat =>( 
                     <button
                     key={canTeachcat}
@@ -29,7 +29,7 @@ function FilterBar({onCategoryChange, activeCategory, onCanTeachCategoryChange, 
                     </button>
                 ))}
             </div>
-            {token && <Link to="/add" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm">Add Skill</Link> }
+            {token && <Link to="/add" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm">Add Skill</Link> }
             
         </div>
         
