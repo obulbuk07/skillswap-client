@@ -18,7 +18,7 @@ function ContactModal({skillId, onClose}){
                     <button 
                         type='button' 
                         onClick={() => {
-                            fetch(`http://localhost:3000/api/skills/${skillId}/contact`, {
+                            fetch(`${import.meta.env.VITE_API_URL}/api/skills/${skillId}/contact`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',

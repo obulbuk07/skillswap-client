@@ -12,7 +12,7 @@ function Home(){
     const token = localStorage.getItem('token')
     const currentUserId = token ? jwtDecode(token).id : null
     useEffect(() => {
-        fetch('http://localhost:3000/api/skills')
+        fetch(`${import.meta.env.VITE_API_URL}/api/skills`)
         .then(res => res.json())
         .then(data => {
             setSkills(data)
@@ -30,7 +30,7 @@ function Home(){
         })
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:3000/api/skills/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/api/skills/${id}`, {
             method: 'DELETE',
             headers:{
                 'Authorization': `Bearer ${localStorage.getItem('token')}`

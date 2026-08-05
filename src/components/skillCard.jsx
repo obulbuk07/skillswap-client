@@ -22,9 +22,9 @@ function SkillCard({id, name, category, author, canTeach, onDelete, isOwner}){
                         <button onClick={onDelete} className="text-xs absolute top-5 right-5 text-red-400 hover:text-red-600">
                             Delete
                         </button>
-                        <button onClick={() => navigate(`/edit/${id}`)} className="text-xs absolute top-5 right-16 text-blue-400 hover:text-blue-600">
+                        {/*<button onClick={() => navigate(`/edit/${id}`)} className="text-xs absolute top-5 right-16 text-blue-400 hover:text-blue-600">
                             Edit
-                        </button>
+                        </button>*/}
                     </>
                 )}
                 

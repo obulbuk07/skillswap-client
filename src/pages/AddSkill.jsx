@@ -16,7 +16,11 @@ function AddSkill(){
                     setErrors({name:'Skill name is required'})
                     return;
                 }
-                fetch('http://localhost:3000/api/skills', {
+                if(!form.category){
+                    setErrors({category:'Category is required'})
+                    return;
+                }
+                fetch(`${import.meta.env.VITE_API_URL}/api/skills`, {
                     method:'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -48,11 +52,13 @@ function AddSkill(){
                         value={form.category}
                         onChange={(e) => setForm({...form, category: e.target.value})}
                     >
+                        <option value="" disabled>Select category</option>
                         <option value="Frontend">Frontend</option>
                         <option value="Backend">Backend</option>
                         <option value="Design">Design</option>
                         <option value="Data">Data</option>
                     </select>
+                    {errors.category && <p className='text-red-500 text-xs mt-1'>{errors.category}</p>}
                 </div>
                 <div className="flex gap-3">
                     <button
